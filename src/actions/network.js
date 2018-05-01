@@ -32,7 +32,7 @@ export const fetchTodos = () => (dispatch) => {
   return fetch('https://todo-server-202613.appspot.com/notes')
     .then(response => response.json())
     .then(json => dispatch(receiveTodos(json)))
-    .catch(error => console.log('Bla.', error));
+    .catch(error => console.log('Could not receive todos', error));
 };
 
 export default fetchTodos;
