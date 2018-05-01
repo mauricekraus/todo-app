@@ -21,11 +21,14 @@ class List extends Component {
           </Button>
         </form>
         <div className="paper-container">
-          {this.props.todos.map(todo => (
-            <div key={todo.id} className="listItem-container">
-              <ListItem title={todo.title} text={todo.text} />
-            </div>
-          ))}
+          {this.props.todos.map((todo) => {
+            console.log(todo);
+            return (
+              <div key={todo._id} className="listItem-container">
+                <ListItem title={todo.title} />
+              </div>
+            );
+          })}
         </div>
       </Paper>
     );
@@ -45,6 +48,6 @@ List.propTypes = {
   todos: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number,
     title: PropTypes.string,
-    text: PropTypes.string,
+    completed: PropTypes.bool,
   })).isRequired,
 };
