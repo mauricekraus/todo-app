@@ -1,9 +1,4 @@
-import {
-  REQUEST_TODO,
-  RECEIVE_TODO,
-  REQUEST_TODOS,
-  RECEIVE_TODOS
-} from './types';
+import { REQUEST_TODO, RECEIVE_TODO, REQUEST_TODOS, RECEIVE_TODOS } from './types';
 
 const requestTodo = todo => ({
   type: REQUEST_TODO,
@@ -37,12 +32,12 @@ export const addTodo = todoTitle => (dispatch) => {
   data.append('title', todoTitle);
   dispatch(requestTodo(todoTitle));
   return fetch('https://todo-server-202613.appspot.com/notes', {
-      body: data,
-      headers: {
-        'content-type': 'application/x-www-form-urlencoded;charset=UTF-8',
-      },
-      method: 'POST',
-    })
+    body: data,
+    headers: {
+      'content-type': 'application/x-www-form-urlencoded;charset=UTF-8',
+    },
+    method: 'POST',
+  })
     .then(response => response.json())
     .then(json => dispatch(receiveTodo(json)))
     .catch(error => console.log('Could not create todo', error));
