@@ -2,33 +2,29 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { TextField, Paper, Button } from 'material-ui';
 import { connect } from 'react-redux';
-import { fetchTodos } from '../actions';
+import { fetchTodos, addTodo } from '../actions';
 import ListItem from './ListItem';
+import AddFormContainer from './addForm/AddFormContainer';
 import './list.css';
 
 class List extends Component {
   componentWillMount() {
     this.props.fetchTodos();
   }
-
+  submit = (todo) => {
+    console.log(todo.todoTitle);
+    this.props.addTodo(todo.todoTitle);
+  };
   render() {
     return (
       <Paper>
-        <form className="form-container" onSubmit={() => console.log('Hallo')}>
-          <TextField label="hallo" margin="normal" />
-          <Button type="submit" color="primary" variant="raised">
-            Create
-          </Button>
-        </form>
+        <AddFormContainer onPress={this.submit} />
         <div className="paper-container">
-          {this.props.todos.map((todo) => {
-            console.log(todo);
-            return (
-              <div key={todo._id} className="listItem-container">
-                <ListItem title={todo.title} />
-              </div>
-            );
-          })}
+          {this.props.todos.map(todo => (
+            <div key={todo._id} className="listItem-container">
+              <ListItem title={todo.title} />
+            </div>
+          ))}
         </div>
       </Paper>
     );
@@ -37,11 +33,10 @@ class List extends Component {
 
 const mapStateToProps = (state) => {
   const { todos, isFetching } = state.todos;
-
-  return { todos, isFetching };
+  return { todos, isFetching, state };
 };
 
-export default connect(mapStateToProps, { fetchTodos })(List);
+export default connect(mapStateToProps, { fetchTodos, addTodo })(List);
 
 List.propTypes = {
   fetchTodos: PropTypes.func.isRequired,
