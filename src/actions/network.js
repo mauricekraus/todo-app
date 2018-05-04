@@ -1,4 +1,4 @@
-import { REQUEST_TODO, RECEIVE_TODO, REQUEST_TODOS, RECEIVE_TODOS } from './types';
+import { REQUEST_TODO, RECEIVE_TODO, REQUEST_TODOS, RECEIVE_TODOS, TOGGLE_TODO } from './types';
 
 const requestTodo = todo => ({
   type: REQUEST_TODO,
@@ -49,4 +49,25 @@ export const fetchTodos = () => (dispatch) => {
     .then(response => response.json())
     .then(json => dispatch(receiveTodos(json)))
     .catch(error => console.log('Could not receive todos', error));
+};
+
+export const toggleTodo = todo => (dispatch) => {
+  const data = new URLSearchParams();
+  data.append('completed', !todo.completed);
+  data.append('title', todo.title);
+  fetch(`https://todo-server-202613.appspot.com/notes/${todo._id}`, {
+    body: data,
+    headers: {
+      'content-type': 'application/x-www-form-urlencoded;charset=UTF-8',
+    },
+    method: 'PUT',
+  })
+    .then(() =>
+      dispatch({
+        type: TOGGLE_TODO,
+        payload: {
+          id: todo._id,
+        },
+      }))
+    .catch(error => console.log('Could not update todo', error));
 };

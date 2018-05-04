@@ -1,4 +1,10 @@
-import { REQUEST_TODOS, RECEIVE_TODOS, REQUEST_TODO, RECEIVE_TODO } from '../actions/types';
+import {
+  REQUEST_TODOS,
+  RECEIVE_TODOS,
+  REQUEST_TODO,
+  RECEIVE_TODO,
+  TOGGLE_TODO,
+} from '../actions/types';
 
 const INITIAL_STATE = {
   isFetching: false,
@@ -12,6 +18,19 @@ function addTodos(todos, newTodos) {
   });
   return t;
 }
+
+const toggleTodoWithId = (todosArray, id) => {
+  const newArray = [];
+  for (let i = 0; i < todosArray.length; i += 1) {
+    if (todosArray[i]._id === id) {
+      todosArray[i].completed = !todosArray[i].completed;
+      newArray.push(todosArray[i]);
+    } else {
+      newArray.push(todosArray[i]);
+    }
+  }
+  return newArray;
+};
 
 const TodoReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
@@ -32,6 +51,9 @@ const TodoReducer = (state = INITIAL_STATE, action) => {
         isFetching: false,
         todos: [...state.todos, action.payload.todo],
       };
+    case TOGGLE_TODO:
+      return { ...state, todos: toggleTodoWithId(state.todos, action.payload.id) };
+
     default:
       return state;
   }
