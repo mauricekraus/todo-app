@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from 'material-ui';
-import MaterialTextField from '../MaterialTextField';
 import { Field } from 'redux-form';
+import PropTypes from 'prop-types';
 
 const AddFormComponent = ({ handleSubmit, onPress }) => (
   <div>
@@ -15,3 +15,8 @@ const AddFormComponent = ({ handleSubmit, onPress }) => (
 );
 
 export default AddFormComponent;
+
+AddFormComponent.propTypes = {
+  handleSubmit: PropTypes.func.isRequired,
+  onPress: PropTypes.func.isRequired,
+};

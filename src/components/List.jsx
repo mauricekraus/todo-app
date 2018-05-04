@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Paper } from 'material-ui';
 import MaterialList from 'material-ui/List';
 import { connect } from 'react-redux';
-import { fetchTodos, addTodo, toggleTodo } from '../actions';
+import { fetchTodos, addTodo, toggleTodo, deleteTodo } from '../actions';
 import CheckItem from './CheckItem';
 import AddFormContainer from './addForm/AddFormContainer';
 import './list.css';
@@ -14,11 +14,15 @@ class List extends Component {
   }
   submit = (todo) => {
     this.props.addTodo(todo.todoTitle);
-    this.props.state.form.addForm.values.todoTitle = ''; // hacky
+    // this.props.todoTitle = ''; // hacky
   };
 
   handleRowClick = (todo) => {
     this.props.toggleTodo(todo);
+  };
+
+  handleDeleteRowClick = (todo) => {
+    this.props.deleteTodo(todo);
   };
 
   render() {
@@ -32,6 +36,7 @@ class List extends Component {
                 title={todo.title}
                 completed={todo.completed}
                 onCheck={() => this.handleRowClick(todo)}
+                onDelete={() => this.handleDeleteRowClick(todo)}
               />
             </div>
           ))}
@@ -42,14 +47,22 @@ class List extends Component {
 }
 
 const mapStateToProps = (state) => {
-  const { todos, isFetching } = state.todos;
-  return { todos, isFetching, state };
+  console.log(state);
+  return {
+    todos: state.todos.todos,
+    isFetching: state.todos.isFetching,
+  };
 };
-
-export default connect(mapStateToProps, { fetchTodos, addTodo, toggleTodo })(List);
+export default connect(mapStateToProps, {
+  fetchTodos,
+  addTodo,
+  toggleTodo,
+  deleteTodo,
+})(List);
 
 List.propTypes = {
   fetchTodos: PropTypes.func.isRequired,
+  deleteTodo: PropTypes.func.isRequired,
   addTodo: PropTypes.func.isRequired,
   toggleTodo: PropTypes.func.isRequired,
   todos: PropTypes.arrayOf(PropTypes.shape({
