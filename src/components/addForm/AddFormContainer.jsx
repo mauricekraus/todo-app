@@ -17,4 +17,5 @@ export default reduxForm(addFormConfiguration)(AddFormContainer);
 AddFormContainer.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   onPress: PropTypes.func.isRequired,
+  editMode: PropTypes.bool.isRequired,
 };

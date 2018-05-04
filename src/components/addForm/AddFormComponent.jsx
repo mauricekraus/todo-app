@@ -21,4 +21,5 @@ export default AddFormComponent;
 AddFormComponent.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   onPress: PropTypes.func.isRequired,
+  editMode: PropTypes.bool.isRequired,
 };
