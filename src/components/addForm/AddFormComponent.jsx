@@ -3,9 +3,10 @@ import { Button } from 'material-ui';
 import { Field } from 'redux-form';
 import PropTypes from 'prop-types';
 import MaterialTextField from '../MaterialTextField';
+import './addForm.css';
 
 const AddFormComponent = ({ handleSubmit, onPress }) => (
-  <div>
+  <div className="addForm-container">
     <form onSubmit={handleSubmit(onPress)}>
       <Field name="todoTitle" label="Todo title" component={MaterialTextField} />
       <Button type="submit" color="primary" variant="raised">
