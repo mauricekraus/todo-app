@@ -34,13 +34,13 @@ function removeTodo(todos, oldTodo) {
   return t;
 }
 
-// TODO:
 const toggleTodoWithId = (todosArray, id) => {
   const newArray = [];
   for (let i = 0; i < todosArray.length; i += 1) {
     if (todosArray[i]._id === id) {
-      todosArray[i].completed = !todosArray[i].completed;
-      newArray.push(todosArray[i]);
+      const temp = todosArray[i];
+      temp.completed = !temp.completed;
+      newArray.push(temp);
     } else {
       newArray.push(todosArray[i]);
     }
