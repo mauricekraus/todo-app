@@ -6,5 +6,15 @@ import reducer from '../reducers';
 const loggerMiddleware = createLogger();
 
 export default function configureStore() {
-  return createStore(reducer, applyMiddleware(thunkMiddleware, loggerMiddleware));
+  return createStore(
+    reducer,
+    {
+      todos: {
+        isFetching: false,
+        todos: [],
+      },
+      form: {},
+    },
+    applyMiddleware(thunkMiddleware, loggerMiddleware),
+  );
 }
