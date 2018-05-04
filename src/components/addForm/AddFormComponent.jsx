@@ -2,6 +2,7 @@ import React from 'react';
 import { Button } from 'material-ui';
 import { Field } from 'redux-form';
 import PropTypes from 'prop-types';
+import MaterialTextField from '../MaterialTextField';
 
 const AddFormComponent = ({ handleSubmit, onPress }) => (
   <div>
