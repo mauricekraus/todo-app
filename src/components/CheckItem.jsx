@@ -10,7 +10,10 @@ const CheckItem = ({
   <div>
     <ListItem role={undefined} dense divider>
       <Checkbox checked={completed} onClick={onCheck} tabIndex={-1} />
-      <ListItemText primary={title} />
+      <ListItemText
+        primary={title}
+        style={{ textDecoration: completed ? 'line-through' : 'none' }}
+      />
       <div>
         <IconButton aria-label="Edit" onClick={onEdit}>
           <EditIcon />

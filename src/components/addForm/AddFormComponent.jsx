@@ -5,12 +5,12 @@ import PropTypes from 'prop-types';
 import MaterialTextField from '../MaterialTextField';
 import './addForm.css';
 
-const AddFormComponent = ({ handleSubmit, onPress }) => (
+const AddFormComponent = ({ handleSubmit, onPress, editMode }) => (
   <div className="addForm-container">
     <form onSubmit={handleSubmit(onPress)}>
       <Field name="todoTitle" label="Todo title" component={MaterialTextField} />
       <Button type="submit" color="primary" variant="raised">
-        Create
+        {editMode ? 'Update' : 'Create'}
       </Button>
     </form>
   </div>

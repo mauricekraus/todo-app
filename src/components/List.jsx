@@ -49,7 +49,7 @@ class List extends Component {
   render() {
     return (
       <Paper>
-        <AddFormContainer onPress={this.submit} />
+        <AddFormContainer onPress={this.submit} editMode={this.props.editMode.mode} />
         <MaterialList className="paper-container">
           {this.props.todos.map(todo => (
             <div key={todo._id}>
