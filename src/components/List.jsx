@@ -89,25 +89,26 @@ export default connect(mapStateToProps, {
 })(List);
 
 List.propTypes = {
+  clearFields: PropTypes.func.isRequired,
   fetchTodos: PropTypes.func.isRequired,
   deleteTodo: PropTypes.func.isRequired,
+  updateTodo: PropTypes.func.isRequired,
+  changeEditMode: PropTypes.func.isRequired,
+  change: PropTypes.func.isRequired,
   addTodo: PropTypes.func.isRequired,
   toggleTodo: PropTypes.func.isRequired,
+  editMode: PropTypes.objectOf(PropTypes.shape({
+    mode: PropTypes.bool.isRequired,
+    todo: PropTypes.objectOf(PropTypes.shape({
+      _id: PropTypes.number,
+      title: PropTypes.string,
+      completed: PropTypes.bool,
+    })).isRequired,
+  }).isRequired).isRequired,
   todos: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number,
+    _id: PropTypes.number,
     title: PropTypes.string,
     completed: PropTypes.bool,
   })).isRequired,
-  form: PropTypes.objectOf(PropTypes.shape({
-    addForm: PropTypes.shape({
-      values: PropTypes.objectOf({ todoTitle: PropTypes.string.isRequired }),
-      registeredFields: PropTypes.objectOf({
-        todoTitle: PropTypes.objectOf({
-          name: PropTypes.string.isRequired,
-          type: PropTypes.string.isRequired,
-          count: PropTypes.number.isRequired,
-        }),
-      }),
-    }),
-  })).isRequired,
+  textField: PropTypes.string.isRequired,
 };
