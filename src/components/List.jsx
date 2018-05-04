@@ -13,8 +13,12 @@ class List extends Component {
     this.props.fetchTodos();
   }
   submit = (todo) => {
-    this.props.addTodo(todo.todoTitle);
-    // this.props.todoTitle = ''; // hacky
+    if (todo.todoTitle !== undefined) {
+      if (todo.todoTitle.trim().length !== 0) {
+        this.props.addTodo(todo.todoTitle);
+      }
+      this.props.form.addForm.values.todoTitle = '';
+    }
   };
 
   handleRowClick = (todo) => {
@@ -46,13 +50,11 @@ class List extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  console.log(state);
-  return {
-    todos: state.todos.todos,
-    isFetching: state.todos.isFetching,
-  };
-};
+const mapStateToProps = state => ({
+  todos: state.todos.todos,
+  isFetching: state.todos.isFetching,
+  form: state.form,
+});
 export default connect(mapStateToProps, {
   fetchTodos,
   addTodo,
@@ -69,5 +71,17 @@ List.propTypes = {
     id: PropTypes.number,
     title: PropTypes.string,
     completed: PropTypes.bool,
+  })).isRequired,
+  form: PropTypes.objectOf(PropTypes.shape({
+    addForm: PropTypes.shape({
+      values: PropTypes.objectOf({ todoTitle: PropTypes.string.isRequired }),
+      registeredFields: PropTypes.objectOf({
+        todoTitle: PropTypes.objectOf({
+          name: PropTypes.string.isRequired,
+          type: PropTypes.string.isRequired,
+          count: PropTypes.number.isRequired,
+        }),
+      }),
+    }),
   })).isRequired,
 };
