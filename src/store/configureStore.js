@@ -10,6 +10,10 @@ export default function configureStore() {
     reducer,
     {
       todos: {
+        editMode: {
+          mode: false,
+          todo: {},
+        },
         isFetching: false,
         todos: [],
       },

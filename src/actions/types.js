@@ -5,6 +5,9 @@ export const RECEIVE_TODO = 'RECEIVE_TODO';
 export const TOGGLE_TODO = 'TOGGLE_TODO';
 export const DELETE_TODO = 'DELETE_TODO';
 export const CONFIRM_DELETE_TODO = 'CONFIRM_DELETE_TODO';
+export const CHANGE_EDITMODE = 'CHANGE_EDITMODE';
+export const REQUEST_UPDATE = 'REQUEST_UPDATE';
+export const CONFIRM_UPDATE = 'CONFIRM_UPDATE';
 
 export const ADD_TODO = 'ADD_TODO';
 export const GET_TODOS = 'GET_TODOS';

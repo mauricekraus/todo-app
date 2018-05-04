@@ -6,6 +6,9 @@ import {
   TOGGLE_TODO,
   DELETE_TODO,
   CONFIRM_DELETE_TODO,
+  CHANGE_EDITMODE,
+  REQUEST_UPDATE,
+  CONFIRM_UPDATE,
 } from './types';
 
 const requestDeletion = () => ({
@@ -43,6 +46,18 @@ const receiveTodos = json => ({
   payload: {
     todos: json,
     receivedAt: Date.now(),
+  },
+});
+
+const requestUpdate = () => ({
+  type: REQUEST_UPDATE,
+});
+
+const confirmUpdate = (todoId, newTitle) => ({
+  type: CONFIRM_UPDATE,
+  payload: {
+    title: newTitle,
+    id: todoId,
   },
 });
 
@@ -101,4 +116,28 @@ export const deleteTodo = todo => (dispatch) => {
   })
     .then(() => dispatch(confirmDeletion(todo)))
     .catch(error => console.log('Could not delete todo', error));
+};
+
+export const changeEditMode = todo => ({
+  type: CHANGE_EDITMODE,
+  payload: {
+    todo,
+  },
+});
+
+export const updateTodo = (todo, newTitle) => (dispatch) => {
+  const data = new URLSearchParams();
+  data.append('completed', todo.completed);
+  data.append('title', newTitle);
+  dispatch(requestUpdate);
+  return fetch(`https://todo-server-202613.appspot.com/notes/${todo._id}`, {
+    body: data,
+    headers: {
+      'content-type': 'application/x-www-form-urlencoded;charset=UTF-8',
+    },
+    method: 'PUT',
+  })
+    .then(response => response.json())
+    .then(json => dispatch(confirmUpdate(todo._id, json.title)))
+    .catch(error => console.log('Could not update todo', error));
 };
