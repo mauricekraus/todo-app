@@ -4,17 +4,32 @@ import {
   REQUEST_TODO,
   RECEIVE_TODO,
   TOGGLE_TODO,
+  DELETE_TODO,
+  CONFIRM_DELETE_TODO,
 } from '../actions/types';
 
 const INITIAL_STATE = {
-  isFetching: false,
-  todos: [],
+  todos: {
+    isFetching: false,
+    todos: [],
+  },
+  form: {},
 };
 
 function addTodos(todos, newTodos) {
   const t = [...todos];
   newTodos.forEach((element) => {
     t.push(element);
+  });
+  return t;
+}
+
+function removeTodo(todos, oldTodo) {
+  const t = [];
+  todos.forEach((el) => {
+    if (el !== oldTodo) {
+      t.push(el);
+    }
   });
   return t;
 }
@@ -52,8 +67,22 @@ const TodoReducer = (state = INITIAL_STATE, action) => {
         todos: [...state.todos, action.payload.todo],
       };
     case TOGGLE_TODO:
-      return { ...state, todos: toggleTodoWithId(state.todos, action.payload.id) };
-
+      return {
+        isFetching: true,
+        ...state,
+        todos: toggleTodoWithId(state.todos, action.payload.id),
+      };
+    case DELETE_TODO:
+      return {
+        isFetching: true,
+        ...state,
+      };
+    case CONFIRM_DELETE_TODO:
+      return {
+        isFetching: false,
+        ...state,
+        todos: removeTodo(state.todos, action.payload.todo),
+      };
     default:
       return state;
   }
