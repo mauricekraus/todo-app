@@ -6,8 +6,12 @@
     "@material-ui/icons": "^1.0.0-beta.43",
     "babel-eslint": "^8.2.3",
     "cross-fetch": "^2.1.1",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.7.0",
+    "flow-bin": "^0.71.0",
+    "flow-typed": "^2.4.0",
     "material-ui": "^1.0.0-beta.43",
     "prop-types": "^15.6.1",
     "react": "^16.3.2",
@@ -15,6 +19,7 @@
     "react-redux": "^5.0.7",
     "react-scripts": "1.1.4",
     "react-spinkit": "^3.0.0",
+    "react-test-renderer": "^16.3.2",
     "redux": "^4.0.0",
     "redux-form": "^7.3.0",
     "redux-logger": "^3.0.6",
@@ -24,14 +29,10 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "flow": "flow"
   },
   "devDependencies": {
-    "babel-jest": "^22.4.3",
-    "babel-preset-env": "^1.6.1",
-    "babel-preset-react": "^6.24.1",
-    "eslint-config-airbnb": "^16.1.0",
-    "jest": "^22.4.3",
-    "react-test-renderer": "^16.3.2"
+    "eslint-config-airbnb": "^16.1.0"
   }
 }
