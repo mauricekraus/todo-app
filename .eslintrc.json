@@ -20,10 +20,18 @@
     "no-undef": "warn",
     "no-unreachable": "warn",
     "no-unused-vars": "warn",
+    "quotes": [2, "single", {
+      "avoidEscape": true
+    }],
     "constructor-super": "warn",
     "valid-typeof": "warn",
     "no-extra-semi": "error",
     "no-console": "off",
-    "no-underscore-dangle": "off"
+    "no-underscore-dangle": "off",
+    "eol-last": "off",
+    "globals": {
+      "Todo": false,
+      "State": false
+    }
   }
 }
