@@ -12,7 +12,7 @@ import {
   changeEditMode,
   updateTodo,
 } from '../actions';
-import CheckItem from './CheckItem';
+import CheckItem from './checkItem/CheckItem';
 import AddFormContainer from './addForm/AddFormContainer';
 import './list.css';
 
