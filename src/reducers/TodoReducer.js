@@ -21,7 +21,7 @@ const INITIAL_STATE = {
   },
 };
 
-function addTodos(todos, newTodos) {
+function addTodos(todos: [Todo], newTodos: [Todo]): [Todo] {
   const t = [...todos];
   newTodos.forEach((element) => {
     t.push(element);
@@ -29,7 +29,7 @@ function addTodos(todos, newTodos) {
   return t;
 }
 
-function removeTodo(todos, oldTodo) {
+function removeTodo(todos: [Todo], oldTodo: [Todo]): [Todo] {
   const t = [];
   todos.forEach((el) => {
     if (el !== oldTodo) {
@@ -39,7 +39,7 @@ function removeTodo(todos, oldTodo) {
   return t;
 }
 
-function updateTodo(todos, id, update) {
+function updateTodo(todos: [Todo], id: number, update: Todo): [Todo] {
   const ts = [...todos];
   for (let i = 0; i < ts.length; i += 1) {
     if (ts[i]._id === id) {
@@ -50,7 +50,7 @@ function updateTodo(todos, id, update) {
   return ts;
 }
 
-const toggleTodoWithId = (todosArray, id) => {
+function toggleTodoWithId(todosArray: [Todo], id: number): [Todo] {
   const newArray = [];
   for (let i = 0; i < todosArray.length; i += 1) {
     if (todosArray[i]._id === id) {
@@ -62,12 +62,15 @@ const toggleTodoWithId = (todosArray, id) => {
     }
   }
   return newArray;
-};
+}
 
-const TodoReducer = (state = INITIAL_STATE, action) => {
+const TodoReducer = (state = INITIAL_STATE, action): State => {
   switch (action.type) {
     case REQUEST_TODOS:
-      return { ...state, isFetching: true };
+      return {
+        ...state,
+        isFetching: true,
+      };
     case RECEIVE_TODOS:
       return {
         ...state,
