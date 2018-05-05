@@ -21,7 +21,6 @@ class List extends Component {
     this.props.fetchTodos();
   }
   submit = () => {
-    console.log(this.props);
     if (this.props.editMode.mode) {
       this.props.updateTodo(this.props.editMode.todo, this.props.textField);
       this.props.clearFields('addForm', false, false, 'todoTitle');
@@ -39,6 +38,7 @@ class List extends Component {
 
   handleDeleteRowClick = (todo) => {
     this.props.deleteTodo(todo);
+    this.props.clearFields('addForm', false, false, 'todoTitle');
   };
 
   handelEditRowClick = (todo) => {
