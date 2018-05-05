@@ -6,8 +6,8 @@ import MaterialTextField from '../MaterialTextField';
 import './addForm.css';
 
 const AddFormComponent = ({ handleSubmit, onPress, editMode }) => (
-  <div className="addForm-container">
-    <form onSubmit={handleSubmit(onPress)}>
+  <div>
+    <form className="addForm-container" onSubmit={handleSubmit(onPress)}>
       <Field name="todoTitle" label="Todo title" component={MaterialTextField} />
       <Button type="submit" color="primary" variant="raised">
         {editMode ? 'Update' : 'Create'}
