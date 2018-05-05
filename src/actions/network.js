@@ -66,12 +66,12 @@ export const addTodo = todoTitle => (dispatch) => {
   data.append('title', todoTitle);
   dispatch(requestTodo(todoTitle));
   return fetch('https://todo-server-202613.appspot.com/notes', {
-    body: data,
-    headers: {
-      'content-type': 'application/x-www-form-urlencoded;charset=UTF-8',
-    },
-    method: 'POST',
-  })
+      body: data,
+      headers: {
+        'content-type': 'application/x-www-form-urlencoded;charset=UTF-8',
+      },
+      method: 'POST',
+    })
     .then(response => response.json())
     .then(json => dispatch(receiveTodo(json)))
     .catch(error => console.log('Could not create todo', error));
@@ -90,12 +90,12 @@ export const toggleTodo = todo => (dispatch) => {
   data.append('completed', !todo.completed);
   data.append('title', todo.title);
   return fetch(`https://todo-server-202613.appspot.com/notes/${todo._id}`, {
-    body: data,
-    headers: {
-      'content-type': 'application/x-www-form-urlencoded;charset=UTF-8',
-    },
-    method: 'PUT',
-  })
+      body: data,
+      headers: {
+        'content-type': 'application/x-www-form-urlencoded;charset=UTF-8',
+      },
+      method: 'PUT',
+    })
     .then(() =>
       dispatch({
         type: TOGGLE_TODO,
@@ -109,11 +109,11 @@ export const toggleTodo = todo => (dispatch) => {
 export const deleteTodo = todo => (dispatch) => {
   dispatch(requestDeletion);
   return fetch(`https://todo-server-202613.appspot.com/notes/${todo._id}`, {
-    headers: {
-      'content-type': 'application/x-www-form-urlencoded;charset=UTF-8',
-    },
-    method: 'DELETE',
-  })
+      headers: {
+        'content-type': 'application/x-www-form-urlencoded;charset=UTF-8',
+      },
+      method: 'DELETE',
+    })
     .then(() => dispatch(confirmDeletion(todo)))
     .catch(error => console.log('Could not delete todo', error));
 };
@@ -131,12 +131,12 @@ export const updateTodo = (todo, newTitle) => (dispatch) => {
   data.append('title', newTitle);
   dispatch(requestUpdate);
   return fetch(`https://todo-server-202613.appspot.com/notes/${todo._id}`, {
-    body: data,
-    headers: {
-      'content-type': 'application/x-www-form-urlencoded;charset=UTF-8',
-    },
-    method: 'PUT',
-  })
+      body: data,
+      headers: {
+        'content-type': 'application/x-www-form-urlencoded;charset=UTF-8',
+      },
+      method: 'PUT',
+    })
     .then(response => response.json())
     .then(json => dispatch(confirmUpdate(todo._id, json.title)))
     .catch(error => console.log('Could not update todo', error));
