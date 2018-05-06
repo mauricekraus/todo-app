@@ -1,11 +1,16 @@
 import React from 'react';
 import { Button } from 'material-ui';
 import { Field } from 'redux-form';
-import PropTypes from 'prop-types';
 import MaterialTextField from '../MaterialTextField';
 import './addForm.css';
 
-const AddFormComponent = ({ handleSubmit, onPress, editMode }) => (
+type Props = {
+  handleSubmit: (() => void) => void,
+  onPress: () => void,
+  editMode: boolean,
+};
+
+const AddForm = ({ handleSubmit, onPress, editMode }: Props) => (
   <div>
     <form className="addForm-container" onSubmit={handleSubmit(onPress)}>
       <Field name="todoTitle" label="Todo title" component={MaterialTextField} />
@@ -16,10 +21,4 @@ const AddFormComponent = ({ handleSubmit, onPress, editMode }) => (
   </div>
 );
 
-export default AddFormComponent;
-
-AddFormComponent.propTypes = {
-  handleSubmit: PropTypes.func.isRequired,
-  onPress: PropTypes.func.isRequired,
-  editMode: PropTypes.bool.isRequired,
-};
+export default AddForm;

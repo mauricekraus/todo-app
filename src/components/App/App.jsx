@@ -1,8 +1,8 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { Typography } from 'material-ui';
-import configureStore from './store/configureStore';
-import List from './components/List';
+import configureStore from '../../store/configureStore';
+import List from '../List';
 import './App.css';
 
 const store = configureStore();
